@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Display event</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #dfe9f3, #98e475);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #333;
+    }
+
+    .container {
+      width: 70%;
+      margin: 50px auto;
+      padding: 30px;
+      background: #ffffffdd;
+      backdrop-filter: blur(8px);
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 28px;
+      margin-bottom: 20px;
+      color: #222;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    th, td {
+      padding: 12px 15px;
+      text-align: center;
+    }
+
+    th {
+      background:   #dfe9f3;
+      color: #222;
+      font-weight: 600;
+    }
+
+    tr:nth-child(even) {
+      background: #f9f9f9;
+    }
+
+    tr:hover {
+      background: #f1f7ff;
+    }
+
+    a button {
+      padding: 8px 16px;
+      margin: 4px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .edit {
+      background: linear-gradient(45deg, #7ce49b, #678c96);
+      color: #fff;
+    }
+    .edit:hover {
+      background: linear-gradient(45deg, #678c96, #7ce49b);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+    }
+
+    .delete {
+      background: linear-gradient(45deg, #ff6a6a, #ff8a8a);
+      color: #fff;
+    }
+    .delete:hover {
+      background: linear-gradient(45deg, #ff8a8a, #ff6a6a);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+    }
+
+    td[colspan="5"] {
+      font-style: italic;
+      color: #666;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Scheduled Events</h2>
+     <p style="text-align:center; color:#555; font-size:14px; line-height:1.6; margin-bottom:20px;">
+    Here you can browse all scheduled events and stay up-to-date.
+    Use the actions provided to edit or delete any event as necessary.
+  </p>
+    <div style="text-align: center; margin-bottom: 20px;">
+  <form method="get" action="">
+    <input type="text" name="q" placeholder="Search events..." 
+           value="{{ request.GET.q }}" 
+           style="padding: 8px; width: 250px; border-radius: 5px; border: 1px solid #ccc;">
+    <button type="submit" 
+            style="padding: 8px 15px; border: none; border-radius: 5px; background: linear-gradient(45deg, #60a4ad, #26ce34); color: white;">
+      Search
+    </button>
+  </form>
+</div>
+    <table>
+      <tr>
+        <th>Title</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Location</th>
+        <th>Actions</th>
+      </tr>
+      {% for event in events %}
+      <tr>
+        <td>{{ event.title }}</td>
+        <td>{{ event.date }}</td>
+        <td>{{ event.time }}</td>
+        <td>{{ event.location }}</td>
+        <td>
+          <a href="{% url 'update_event' event.pk %}"><button class="edit">Edit</button></a>
+          <a href="{% url 'delete_event' event.pk %}"><button class="delete">Delete</button></a>
+        </td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="5">No events found.</td></tr>
+      {% endfor %}
+    </table>
+  </div>
+</body>
+</html>

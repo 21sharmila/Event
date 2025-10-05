@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Event</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #dfe9f3, #98e475); /* same elegant gradient */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #333;
+    }
+
+    .container {
+      width: 420px;
+      background: #ffffffdd;
+      backdrop-filter: blur(8px);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      margin-bottom: 25px;
+      color: #222;
+      text-align: center;
+      font-size: 26px;
+      font-weight: 600;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: #444;
+      font-size: 14px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px 12px;
+      margin-bottom: 18px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+
+    input:focus {
+      border-color: #7ce49b;
+      box-shadow: 0 0 8px rgba(124,228,155,0.4);
+      outline: none;
+    }
+
+    .btn {
+      width: 100%;
+      background: linear-gradient(45deg, #7ce49b, #678c96);
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      background: linear-gradient(45deg, #678c96, #7ce49b);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Create Event</h2>
+    <p style="text-align:center; color:#555; font-size:14px; line-height:1.6; margin-bottom:20px;">
+     Fill all the required details accurately to ensure it appears correctly in the event list.
+     Once submitted, the event will be visible in the Event Dashboard.
+  </p>
+    <form method="post">
+      {% csrf_token %}
+      
+      <label for="title">Event Title</label>
+      <input type="text" id="title" name="title" placeholder="Enter event title" required>
+      
+      <label for="date">Event Date</label>
+      <input type="date" id="date" name="date" required>
+      
+      <label for="time">Event Time</label>
+      <input type="time" id="time" name="time" required>
+      
+      <label for="location">Event Location</label>
+      <input type="text" id="location" name="location" placeholder="Enter event location" required>
+      
+      <button type="submit" class="btn">Add Event</button>
+    </form>
+  </div>
+</body>
+</html>
